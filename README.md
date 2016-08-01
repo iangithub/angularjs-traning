@@ -6,7 +6,6 @@ AngularJS Traning Sample Code
 - AngularJS基礎概念
 - AngularJS Directive與Controller
 - AngularJS表單與資料繫結
-- AngularJS Filters
 - AngularJS Dependency Injection System
 - AngularJS ngRoute / ui-routing 
 - AngularJS directive & component
