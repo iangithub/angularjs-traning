@@ -1,0 +1,15 @@
+﻿<table class="table">
+    <thead>
+        <tr><td>no</td><td>name</td><td>jobtype</td><td>明細</td><td>編輯</td></tr>
+    </thead>
+    <tbody>
+
+        <tr ng-repeat="emp in ctrl.emps">
+            <td ng-bind="emp.No"></td>
+            <td ng-bind="emp.Name"></td>
+            <td ng-bind="emp.JobType"></td>
+            <td><a ui-sref="view({no:emp.No})">View</a></td>
+            <td><a ui-sref="edit({no:emp.No})">Edit</a></td>
+        </tr>
+    </tbody>
+</table>

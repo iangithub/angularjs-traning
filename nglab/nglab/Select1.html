@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <div>
+            <select ng-model="ctrl.emptype"
+                    ng-options="types.type for types 
+                    in ctrl.emptypesmodel">
+                <option value="">-- 請選擇 --</option>
+            </select>
+            你選擇的是:<span ng-bind="ctrl.emptype.type"></span>
+        </div>
+        <div>
+            <select ng-model="ctrl.emptype2"
+                    ng-options="(types.no+' - '+types.type) for types in ctrl.emptypesmodel">
+                <option value="">-- 請選擇 --</option>
+            </select>
+            你選擇的是:<span ng-bind="ctrl.emptype2.type"></span>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', [
+            function () {
+                var self = this;
+                self.emptypesmodel = [
+                    { no: 1, type: 'RD' },
+                    { no: 2, type: 'PG' },
+                    { no: 3, type: 'Boss' },
+                ];
+
+               
+                //set def item
+                self.emptype = self.emptypesmodel[1];
+            }
+        ]);
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <div>
+            <label>姓名:</label>
+            <input type="text" ng-model="ctrl.searchstr.name">
+            <p></p>
+            <label>職位:</label>
+            <input type="text" ng-model="ctrl.searchstr.type">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>編號</td>
+                    <td>姓名</td>
+                    <td>職位</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="emp in ctrl.emps
+                    | filter:ctrl.searchstr:true
+                    | orderBy:'name'">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ emp.name }}</td>
+                    <td>{{ emp.type }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', [
+            function () {
+                var self = this;
+                self.emps = [
+                    { name: 'ian', type: 'RD' },
+                    { name: 'andy', type: 'RD' },
+                    { name: 'joe', type: 'RD' },
+                    { name: 'lee', type: 'PG' },
+                    { name: 'sandy', type: 'BOSS' },
+                ];
+            }
+        ]);
+
+    </script>
+</body>
+</html>

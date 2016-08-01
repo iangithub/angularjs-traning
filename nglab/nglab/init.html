@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl" 
+         >
+        <input type="text" ng-model="ctrl.name" />
+        <input type="text" ng-model="ctrl.name2" 
+            ng-init="ctrl.name2='ian2'"/>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', [
+            function () {
+                var self = this;
+                self.name = 'ian1';
+            }
+        ]);
+    </script>
+</body>
+</html>

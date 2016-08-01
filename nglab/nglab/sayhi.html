@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <input type="text" ng-model="ctrl.name" />
+        Hi : <span ng-bind="ctrl.name"></span>
+    </div>
+    <script src="MyJS/sayhi.js"></script>
+    <script>
+        var app = angular.module('myapp');
+    </script>
+</body>
+</html>

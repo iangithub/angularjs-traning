@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <div>
+            <label>姓名:</label>
+            <input type="text" ng-model="ctrl.searchstr.name">
+            <p></p>
+            <label>職位:</label>
+            <input type="text" ng-model="ctrl.searchstr.type">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>編號</td>
+                    <td>姓名</td>
+                    <td>職位</td>
+                    <td>薪資</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="emp in ctrl.empsfinal">
+                    <td ng-bind="$index + 1"></td>
+                    <td ng-bind="emp.name"></td>
+                    <td ng-bind="emp.type"></td>
+                    <td ng-bind="emp.pay"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', ['filterFilter',
+        function (filterFilter) {
+            var self = this;
+            self.emps = [
+                { name: 'ian', type: 'RD', pay: '50000' },
+                { name: 'andy', type: 'RD', pay: '32500' },
+                { name: 'joe', type: 'RD', pay: '52000' },
+                { name: 'lee', type: 'PG', pay: '47000' },
+                { name: 'sandy', type: 'BOSS', pay: '120000' },
+            ];
+            self.empsfinal = filterFilter(self.emps, 'RD');
+        }]);
+
+    </script>
+</body>
+</html>

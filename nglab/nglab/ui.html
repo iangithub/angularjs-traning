@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-touch.min.js"></script>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <uib-alert ng-repeat="alert in ctrl.alerts" 
+                   type="{{alert.type}}" 
+                   close="ctrl.closeAlert($index)">{{alert.msg}}</uib-alert>
+        <uib-alert template-url="alert.html">A happy alert!</uib-alert>
+        <button type="button" class='btn btn-default' 
+                ng-click="ctrl.addAlert()">Add Alert</button>
+    </div>
+
+    <script>
+        var app = angular.module('myapp', ['ui.bootstrap']);
+        app.controller('mainctrl', [function () {
+            var self = this;
+            self.alerts = [
+                { type: 'danger', msg: 'alert message 1' },
+                { type: 'success', msg: 'alert message 2' }
+            ];
+            self.addAlert = function () {
+                self.alerts.push({ msg: 'add one alert message' });
+            };
+
+            self.closeAlert = function (index) {
+                self.alerts.splice(index, 1);
+            };
+
+        }]);
+    </script>
+</body>
+</html>

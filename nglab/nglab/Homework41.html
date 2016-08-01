@@ -1,0 +1,10 @@
+﻿<table>
+    <tr><td>no</td><td>name</td><td>jobtype</td><td>明細</td></tr>
+    <tr ng-repeat="emp in ctrl.emps">
+        <td ng-bind="emp.No"></td>
+        <td ng-bind="emp.Name"></td>
+        <td ng-bind="emp.JobType"></td>
+        <td><a href="#/view/{{emp.No}}">View</a></td>
+        <td><a href="#/edit/{{emp.No}}">Edit</a></td>
+    </tr>
+</table>

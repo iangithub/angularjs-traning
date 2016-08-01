@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <div ng-repeat="emp in ctrl.emps">
+            <span ng-bind="emp.no"></span>
+            <span ng-bind="emp.name"></span>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+
+        app.controller('mainctrl', [
+            function () {
+                var self = this;
+                self.emps = [
+                    {no:'001',name:'ian'},
+                    {no:'002',name:'andy'},
+                    {no:'003',name:'steve'},
+                ];
+            }
+        ]);
+
+    </script>
+</body>
+</html>

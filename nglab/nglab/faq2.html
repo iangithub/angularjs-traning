@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="MyJS/faq2.js"></script>
+</head>
+<body ng-app="myapp">
+    <h3>不同controller，針對原始資料進行修改並同步(use services)</h3>
+    <div ng-controller="mainctrl as ctrl">
+        no:<span ng-bind="ctrl.emp.no"></span><br />
+        name:<span ng-bind="ctrl.emp.name"></span>
+    </div>
+    <div ng-controller="editctrl as ectrl">
+        name:<input ng-model="ectrl.emp.name" /><br />
+        <button ng-click="ectrl.save()">Save</button>
+    </div>
+   
+</body>
+</html>

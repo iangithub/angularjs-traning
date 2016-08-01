@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="bmiapp">
+    <div ng-controller="bmictrl as ctrl">
+        身高:<input type="text" ng-model="ctrl.heightval" />
+        <p></p>
+        體重:<input type="text" ng-model="ctrl.weightval" />
+        <p></p>
+        BMI=<input type="text" ng-model="ctrl.bmival"/>
+        <p></p>
+        <button ng-click="ctrl.calbmi()">BMI</button>
+    </div>
+    <script>
+        var app = angular.module('bmiapp', []);
+        app.controller('bmictrl', [
+            function () {
+                var self = this;
+                self.bmival = 0;
+                self.calbmi = function () {
+                    self.bmival = self.weightval / (self.heightval / 100 * self.heightval / 100);
+                };
+            }
+        ]);
+    </script>
+</body>
+</html>

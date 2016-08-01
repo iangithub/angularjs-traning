@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <base href="/">
+</head>
+<body>
+    <div>
+        <h1>ng Route - 初探</h1>
+        <ul>
+            <li><a href="/">Def Page</a></li>
+            <li><a href="/page2">Page2</a></li>
+            <li><a href="/page123">else Page</a></li>
+        </ul>
+        <div ng-view></div>
+    </div>
+
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.min.js"></script>
+
+    <script>
+        var app = angular.module('myapp', ['ngRoute']);
+
+        app.config(['$routeProvider', '$locationProvider',
+            function ($routeProvider, $locationProvider) {
+                $locationProvider.html5Mode(true);
+                $routeProvider.when('/', {
+                    redirectTo: '/'
+                }).when('/page2', {
+                    template: '<h3>This is Page2</h3>'
+                }).otherwise({
+                    redirectTo: '/'
+                });
+            }]);
+
+
+        //app.config(['$routeProvider', function ($routeProvider) {
+        //    $routeProvider.when('/', {
+        //        redirectTo: '/'
+        //    }).when('/page2', {
+        //        templateUrl: 'route2.html'
+        //    }).otherwise({
+        //        redirectTo: '/'
+        //    });
+        //}]);
+    </script>
+</body>
+</html>

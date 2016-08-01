@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <form name="empform" ng-submit="ctrl.send()">
+            <input type="text" name="empname" ng-model="ctrl.emp.name"
+                   required />
+            <span style="color:red" ng-show="empform.empname.$error.required">*</span>
+            <p />
+            <input type="text" name="empno" ng-model="ctrl.emp.no"
+                   required ng-minlength="5" />
+            <span style="color:red" ng-show="empform.empno.$error.required">*</span>
+            <span style="color:red" ng-show="empform.empno.$error.minlength">工號最小長度5碼</span>
+            <p />
+            <input type="submit" value="send" ng-disabled="empform.$invalid" />
+            <div>
+                Name Error = {{empform.empname.$error}}<br />
+                Empno Error = {{empform.empno.$error}}
+            </div>
+        </form>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', [
+            function () {
+                var self = this;
+                self.send = function () {
+                    console.log('data send:' + self.emp);
+                };
+            }
+        ]);
+    </script>
+</body>
+</html>

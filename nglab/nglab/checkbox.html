@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+
+        ng-model : <input type="checkbox"
+                          ng-model="ctrl.ck" />
+        ng-model2 : <input type="checkbox"
+                           ng-model="ctrl.ck2"
+                           ng-true-value="'Y'"
+                           ng-false-value="'N'" />
+        ng-checked : <input type="checkbox"
+                            ng-checked="ctrl.ck2==='Y'" />
+
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', [
+            function () {
+                var self = this;
+                self.ck = true;
+                self.ck2 = 'Y';
+                console.log(self.ck2);
+            }
+        ]);
+
+    </script>
+</body>
+</html>

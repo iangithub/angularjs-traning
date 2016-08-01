@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <table>
+            <tr ng-repeat="(name,emp) in ctrl.emps">
+                <td ng-bind="$index+1"></td>
+                <td ng-bind="emp.no"></td>
+                <td ng-bind="name"></td>
+                <td ng-bind="emp.enterdate"></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', [
+            function () {
+                var self = this;
+                self.emps = {
+                    ian: { no: '001', enterdate: '2001/1/7' },
+                    Andy: { no: '002', enterdate: '2001/5/7' },
+                    steve: { no: '003', enterdate: '2002/11/13' }
+                };
+            }
+        ]);
+    </script>
+</body>
+</html>

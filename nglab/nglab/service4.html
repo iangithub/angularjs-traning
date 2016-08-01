@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="MyJS/service4.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+
+    <div>
+        <div ng-controller="mainctrl as ctrl">
+            <label>ng services</label>
+            <button ng-click="ctrl.additem();">Add Item</button>
+            <table>
+                <tr ng-repeat="emp in ctrl.emps">
+                    <td ng-bind="emp.no"></td>
+                    <td ng-bind="emp.name"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp', []); 
+        //var app = angular.module('myapp'); //right
+        app.controller('mainctrl', ['empservice', function (empservice) {
+            var self = this;
+            self.emps = empservice.getdata();
+            self.additem = function () {
+                empservice.add({
+                    no: self.emps.length + 1, name: 'ian' + self.emps.length
+                });
+            };
+        }]);
+    </script>
+</body>
+</html>

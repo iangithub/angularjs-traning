@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-resource.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <!--呼叫web api 取回資料並bind到UI-->
+    <div ng-controller="mainctrl as ctrl">
+        <div ng-repeat="emp in ctrl.emps">
+            <span ng-bind="emp.No"></span>
+            <span ng-bind="emp.Name"></span>
+            <span ng-bind="emp.JobType"></span>
+            <span ng-bind="emp.Pay"></span>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp', ['ngResource']);
+        app.controller('mainctrl', ['$resource', function ($resource) {
+            var self = this;
+            var url = 'http://myngwebapi.azurewebsites.net/api';
+            self.emps = [];
+
+            var api = $resource(url + '/employee/:id', { id: '@id' }
+                , {
+                    update: {
+                        method: 'PUT'
+                    }
+                });
+
+            self.emps = api.query();
+        }]);
+    </script>
+</body>
+</html>

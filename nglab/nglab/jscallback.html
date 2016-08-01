@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+
+</head>
+<body>
+    <script>
+
+        //function A() {
+        //    setTimeout(function () {
+        //        console.log('this is a');
+        //    }, 1000);
+        //}
+
+        //function B() {
+        //    console.log('this is b');
+        //}
+
+        //A();
+        //B();
+
+
+        //js callback 確保 task run flow
+        function A(callbackfun) {
+            setTimeout(function () {
+                // 模擬從網路讀取資料,需要一些時間
+                console.log('this is a');
+                (callbackfun && typeof (callbackfun) === "function") && callbackfun();
+            }, 3000);
+        }
+
+        function B(callbackfun) {
+            console.log('this is b');
+            (callbackfun && typeof (callbackfun) === "function") && callbackfun();
+        }
+        function C() {
+            console.log('1111');
+        }
+
+        A(function () {
+            B(function () {
+                C();
+            });
+        });
+
+    </script>
+</body>
+</html>

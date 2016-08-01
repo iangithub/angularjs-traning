@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <!--使用ng呼叫web api 修改資料-->
+    <div ng-controller="mainctrl as ctrl">
+        NO:<input type="text" ng-model="ctrl.emp.No" />
+        <br />
+        Name:<input type="text" ng-model="ctrl.emp.Name" />
+        <br />
+        <button ng-click="ctrl.edit()">Edit Emp</button>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', ['$http', function ($http) {
+            var self = this;
+            
+            self.edit = function () {
+                $http.put('http://myngwebapi.azurewebsites.net/api/employee/'+self.emp.No, self.emp)
+                .then(function (response) {
+                    console.log(response.data);
+                });
+            };
+        }]);
+    </script>
+</body>
+</html>

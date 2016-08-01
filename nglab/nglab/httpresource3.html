@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-resource.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <!-- 使用$resource呼叫web api 取回資料並bind到UI-->
+    <div ng-controller="mainctrl as ctrl">
+        <div>
+            NO:<input type="text" ng-model="ctrl.emp.No" />
+            <br />
+            Name:<input type="text" ng-model="ctrl.emp.Name" />
+            <br />
+            JobType:<input type="text" ng-model="ctrl.emp.JobType" />
+            <br />
+            Pay:<input type="text" ng-model="ctrl.emp.Pay" />
+            <br />
+            <button ng-click="ctrl.add()">Add New Emp</button>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp', ['ngResource']);
+        app.controller('mainctrl', ['$resource', function ($resource) {
+            var self = this;
+            var url = 'http://myngwebapi.azurewebsites.net/api';
+            self.emps = [];
+
+            //定義add接收回傳array data
+            var api = $resource(url + '/employee/:no', { no: '@No' }
+                , {
+                    add: {
+                        method: 'POST', isArray: true
+                    }
+                });
+
+            self.add = function () {
+                //api.add(self.emp, function (response) {
+                //    console.log(response);
+                //});
+
+                api.add(self.emp);
+            }
+
+        }]);
+    </script>
+</body>
+</html>

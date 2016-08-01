@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <div>
+            Amount : <label ng-bind="ctrl.amount | number" />
+        </div>
+        <div>
+            Currency : <label ng-bind="ctrl.amount | currency" />
+        </div>
+        <div>
+            Currency2 : <label ng-bind="ctrl.amount | currency:'USA '" />
+        </div>
+        <div>
+            Date : <label ng-bind="ctrl.todaydate | date:'yyyy-MM-dd'" />
+        </div>
+        <div>
+            Upcase : <label ng-bind="ctrl.name | uppercase" />
+        </div>
+        <div>
+            Lowcase : <label ng-bind="ctrl.name | lowercase" />
+        </div>
+        <div>
+            Lowcase limitTo  : <label ng-bind="ctrl.str | lowercase | limittTo:3" />
+        </div>
+        <div>
+            Json  : <label ng-bind="ctrl.jobject | json" />
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', [
+            function myfunction() {
+                var self = this;
+                self.amount = 5000;
+                self.todaydate = new Date().getTime();
+                self.name = 'ian chen';
+                self.str = 'abcdefgh';
+                self.jobject = { name: 'ian', lastname: 'chen' };
+                console.log(self.amount);
+            }
+        ]);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-resource.min.js"></script>
+    <script src="MyJS/hw3.js"></script>
+</head>
+<body ng-app="myapp">
+    <!--呼叫web api 取回資料並bind到UI-->
+    <div ng-controller="mainctrl as ctrl">
+        <div ng-repeat="emp in ctrl.emps">
+            <span ng-bind="emp.No"></span>
+            <span ng-bind="emp.Name"></span>
+            <span ng-bind="emp.JobType"></span>
+            <span ng-bind="emp.Pay"></span>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp');
+        app.controller('mainctrl', ['empservice', function (empservice) {
+            var self = this;
+            self.emps = [];
+            self.emps = empservice.query();
+
+            //empservice.query(
+            //     function (data) {
+            //         self.emps = data;
+            //     });
+
+        }]);
+    </script>
+</body>
+</html>

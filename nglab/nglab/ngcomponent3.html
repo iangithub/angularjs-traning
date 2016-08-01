@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl" style="margin:20px">
+        <div ng-repeat="emp in ctrl.emps">
+            <emp-ui emp-data="emp" emp-call="ctrl.call()"></emp-ui>
+        </div>
+    </div>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="MyJS/ngc3.js"></script>
+</body>
+</html>

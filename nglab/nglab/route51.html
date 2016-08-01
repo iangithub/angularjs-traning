@@ -1,0 +1,10 @@
+﻿<h2>這是List Page</h2>
+<table class="table">
+    <tr><td>no</td><td>name</td><td>jobtype</td><td>明細</td></tr>
+    <tr ng-repeat="emp in ctrl.emps">
+        <td ng-bind="emp.no"></td>
+        <td ng-bind="emp.name"></td>
+        <td ng-bind="emp.jobtype"></td>
+        <td><a href="/route5/{{emp.no}}">View</a></td>
+    </tr>
+</table>

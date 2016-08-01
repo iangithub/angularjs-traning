@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+</head>
+    <body ng-app="myapp" >
+        <div ng-controller="mainctrl as ctrl">
+            <form name="userform" ng-submit="ctrl.send()">
+                <table>
+                    <tr>
+                        <td>帳號:</td>
+                        <td>
+                            <input type="text" name="userid"
+                                   ng-model="ctrl.user.uid"
+                                   required />
+                            <span style="color:red"
+                                  ng-show="userform.userid.$error.required">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密碼:</td>
+                        <td>
+                            <input type="password" name="pwd"
+                                   ng-model="ctrl.user.pwd"
+                                   required
+                                   ng-minlength="6" />
+                            <span style="color:red"
+                                  ng-show="userform.pwd.$error.required">*</span>
+                            <span style="color:red"
+                                  ng-show="userform.pwd.$error.minlength">必須至少6碼</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>E-Mail:</td>
+                        <td>
+                            <input type="email" name="mail"
+                                   ng-model="ctrl.user.mail"
+                                   required />
+                            <span style="color:red"
+                                  ng-show="userform.mail.$error.required">*</span>
+                            <span style="color:red"
+                                  ng-show="userform.mail.$error.email">Not valid email!</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>性別:</td>
+                        <td>
+                            男 : <input type="radio" name="gender"
+                                       ng-model="ctrl.user.gender"
+                                       value="male" />
+                            女 : <input type="radio" name="gender"
+                                       ng-model="ctrl.user.gender"
+                                       value="female" />
+                        </td>
+                    </tr>
+                    <tr ng-show="ctrl.user.gender=='male'">
+                        <td>兵役:</td>
+                        <td>
+                            役(免)畢 : <input type="radio" name="military"
+                                           ng-model="ctrl.user.military"
+                                           value="Y" />
+                            未役 : <input type="radio" name="military"
+                                        ng-model="ctrl.user.military"
+                                        value="N" />
+                        </td>
+                    </tr>
+                </table>
+                <p />
+                <input type="submit" value="add"
+                       ng-disabled="userform.$invalid" />
+            </form>
+            <div ng-repeat="user in ctrl.users">
+                <span ng-bind="user.uid"></span>
+                <span ng-bind="user.pwd"></span>
+                <span ng-bind="user.mail"></span>
+                <span ng-bind="user.gender"></span>
+                <span ng-bind="user.military"></span>
+            </div>
+        </div>
+        <script>
+            var app = angular.module('myapp', []);
+            app.controller('mainctrl', [
+                function () {
+                    var self = this;
+                    self.users = [];
+                    self.send = function () {
+                        self.users.push(self.user);
+                        self.user = {};
+                    };
+                }
+            ]);
+        </script>
+    </body>
+</html>

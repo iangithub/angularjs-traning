@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <table>
+            <thead>
+                <tr>
+                    <td>編號</td>
+                    <td>姓名</td>
+                    <td>職位</td>
+                    <td>薪資</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="emp in ctrl.emps">
+                    <td ng-bind="$index + 1"></td>
+                    <td ng-bind="emp.name | addgender:emp.gender"></td>
+                    <td ng-bind="emp.type"></td>
+                    <td ng-bind="emp.pay"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', [
+        function () {
+            var self = this;
+            self.emps = [
+                { name: 'ian', type: 'RD', pay: '50000', gender: 'M' },
+                { name: 'andy', type: 'RD', pay: '32500', gender: 'M' },
+                { name: 'joe', type: 'RD', pay: '52000', gender: 'F' },
+                { name: 'lee', type: 'PG', pay: '47000', gender: 'F' },
+                { name: 'sandy', type: 'BOSS', pay: '120000', gender: 'F' },
+            ];
+        }]);
+
+        app.filter('addgender', [function () {
+            return function (namestr, genderval) {
+                var result = namestr;
+                if (genderval === 'M') {
+                    result = 'Mr.' + namestr;
+                }
+                else {
+                    result = 'Ms.' + namestr;
+                }
+                return result;
+            };
+        }]);
+
+    </script>
+</body>
+</html>

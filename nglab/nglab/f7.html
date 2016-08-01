@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="mainctrl as ctrl">
+        <form name="empform" ng-submit="ctrl.send()">
+            ID : <input type="text" name="userid" 
+                        ng-model="ctrl.user.uid"
+                        required 
+                        ng-pattern="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,12}$/"/>
+            <span style="color:red" 
+                  ng-show="empform.userid.$error.required">*</span>
+            <span style="color:red" 
+                  ng-show="empform.userid.$error.pattern">
+            必須包含大寫、小寫英文字母及數字，且長度為6~12碼
+            </span>
+            <p />
+            <input type="submit" value="send" 
+                   ng-disabled="empform.$invalid" />
+        </form>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', [
+            function () {
+                var self = this;
+                self.send = function () {
+                    console.log('data send:' + self.emp);
+                };
+            }
+        ]);
+    </script>
+</body>
+</html>

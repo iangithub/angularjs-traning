@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body ng-app="myapp">
+    <div>
+        <h1>ui Route - 初探</h1>
+        <ul>
+            <li><a href="#/">Def Page</a></li>
+            <li><a href="#/page2">Page2</a></li>
+            <li><a href="#/page123">else Page</a></li>
+        </ul>
+        Use ui-sref
+        <ul>
+            <li><a ui-sref="list">Def Page</a></li>
+            <li><a ui-sref="page2">Page2</a></li>
+        </ul>
+        
+        <div ui-view></div>
+
+    </div>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-ui-router.min.js"></script>
+    <script>
+        var app = angular.module('myapp', ['ui.router']);
+
+        app.config(['$stateProvider', '$urlRouterProvider',
+            function ($stateProvider, $urlRouterProvider) {
+
+                $urlRouterProvider.otherwise('/');
+
+                $stateProvider.state('list', {
+                    url: '/',
+                    redirectTo: 'uirt1.html'
+                }).state('page2', {
+                    url: '/page2',
+                    template: '<h3>This is Page2</h3>'
+                });
+            }]);
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <div ng-controller="ParentCtrl as ctrlp">
+        ParentController: <input type="text" ng-model="ctrlp.empname" />
+        <div ng-controller="ChildCtrl as ctrlc">
+            ChildController: <input type="text" ng-model="ctrlc.empname" />
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('ParentCtrl', [function () {
+            var self = this;
+            self.empname = 'ian';
+        }])
+        .controller('ChildCtrl', [function () {
+            var self = this;
+            alert(self.empname);
+        }]);
+    </script>
+</body>
+</html>

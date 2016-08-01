@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body ng-app="myapp">
+    <div>
+        <div ng-controller="mainctrl as ctrl">
+            <label>ng services</label>
+            <button ng-click="ctrl.additem();">Add Item</button>
+            <table>
+                <tr ng-repeat="emp in ctrl.emps">
+                    <td ng-bind="emp.no"></td>
+                    <td ng-bind="emp.name"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+
+        function empservice(itmes) {
+            var datas = itmes;
+            this.getdata = function () {
+                return datas;
+            }
+            this.add = function (item) {
+                datas.push(item);
+            }
+        }
+        app.provider('empservice', [function () {
+            console.log('provider');
+            var emps = [
+                    { no: '1', name: 'ian' },
+                    { no: '2', name: 'andy' },
+                    { no: '3', name: 'steve' },
+            ];
+            
+            this.$get = [function () {
+                return new empservice(emps);
+            }];
+
+        }]);
+
+
+        app.controller('mainctrl', ['empservice', function (empservice) {
+            var self = this;
+           
+            self.emps = empservice.getdata();
+            self.additem = function () {
+                empservice.add({
+                    no: self.emps.length + 1, name: 'ian' + self.emps.length
+                });
+            };
+        }]);
+    </script>
+</body>
+</html>

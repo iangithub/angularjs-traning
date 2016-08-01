@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <base href="/">
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.min.js"></script>
+    <!--使用route,相關controller,serivce js file必須在後面才載入-->
+    <script src="MyJS/route41.js"></script>
+</head>
+<body>
+    <div>
+        <h1>ng Route - controller2</h1>
+        <ul>
+            <li><a href="/">Def Page</a></li>
+            <li><a href="/page2">Page2</a></li>
+            <li><a href="/page123">else Page</a></li>
+        </ul>
+        <div ng-view></div>
+    </div>
+    <script>
+
+        var app = angular.module('myapp');
+
+        app.config(['$routeProvider', '$locationProvider',
+            function ($routeProvider, $locationProvider) {
+                $locationProvider.html5Mode(true);
+                $routeProvider.when('/', {
+                    redirectTo: '/'
+                }).when('/page2', {
+                    templateUrl: 'route41.html',
+                    controller: 'mainctrl as ctrl'
+                }).otherwise({
+                    redirectTo: '/'
+                });
+            }]);
+
+
+        ////use controllerAs
+        //app.config(['$routeProvider', '$locationProvider', 
+        //function ($routeProvider, $locationProvider) {
+        //$locationProvider.html5Mode(true);
+        //    $routeProvider.when('/', {
+        //        redirectTo: '/'
+        //    }).when('/page2', {
+        //        templateUrl: 'route41.html',
+        //        controller: 'mainctrl',
+        //        controllerAs:'ctrl'
+        //    }).otherwise({
+        //        redirectTo: '/'
+        //    });
+        //}]);
+
+    </script>
+</body>
+</html>

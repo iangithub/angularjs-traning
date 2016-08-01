@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+    <!--使用ng呼叫web api 取回資料並bind到UI-->
+    <div ng-controller="mainctrl as ctrl">
+        <div ng-repeat="emp in ctrl.emps">
+            <span ng-bind="emp.No"></span>
+            <span ng-bind="emp.Name"></span>
+            <span ng-bind="emp.JobType"></span>
+            <span ng-bind="emp.Pay"></span>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('myapp', []);
+        app.controller('mainctrl', ['$http', function ($http) {
+            var self = this;
+            self.emps = [];
+            $http.get('http://myngwebapi.azurewebsites.net/api/employee')
+            .then(function (response) {
+                self.emps = response.data;
+            }, function (error) {
+                alert('server error');
+            });
+        }]);
+    </script>
+</body>
+</html>
